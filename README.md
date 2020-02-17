@@ -1,0 +1,2 @@
+# macosetup
+macOS Setup Script
