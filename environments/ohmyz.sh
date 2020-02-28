@@ -25,9 +25,6 @@ if [ -f '$HOME/.p10k.zsh' ]; then
   grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> $HOME/.zshrc
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting
 brew install zsh-syntax-highlighting
