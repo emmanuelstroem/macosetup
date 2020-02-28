@@ -7,9 +7,9 @@ if test ! $(which zsh); then
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
+
 echo "Setting up PowerLevel10k..."
-# cd  $HOME/.oh-my-zsh/themes/custom/
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
 
 echo "Add .zshrc"
 cp ./dotfiles/.zshrc $HOME/
