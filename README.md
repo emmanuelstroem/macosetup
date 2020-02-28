@@ -48,3 +48,15 @@ Replace the powerlevel config [dotfiles/.p10k.zsh](dotfiles/.p10k.zsh) with your
 ```
 ./setup --help
 ```
+
+## Additional Configuration
+### Configure JAVA
+Symlink
+```
+ln -s fn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+Add JAVA JDK Path to .zshrc file
+```
+echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+```

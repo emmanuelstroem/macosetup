@@ -6,45 +6,48 @@ sh ./environments/base.sh
 echo "SRE Setup"
 
 echo "Installing SRE packages..."
-brew install ansible
-brew install ansible-lint
-brew install awscli
-brew install azure-cli
-brew install bats
-brew install circleci
-brew install derailed/k9s/k9s
-brew install doctl
-brew install drone-cli
-brew install helm
-brew install helmfile
-brew install krew
-brew install kind
-brew install kompose
-brew install kops
-brew install kubeaudit
-brew install kubernetes-cli
-brew install kubernetes-helm
-brew install kustomize
-brew install kubectx
-brew install kubebuilder
-brew install kube-aws
-brew install kubespy
-brew install lxc
-brew install lynis
-brew install minikube
-brew install nomad
-brew install operator-sdk
-brew install pumba
-brew install pulumi
-brew install salt
-brew install skaffold
-brew install sonobuoy
-brew install terraform
-brew install terraformer
-brew install terraform-docs
-brew install aquasecurity/trivy/trivy
-brew install velero
-brew install vault
+sre_packages=(
+  ansible
+  ansible-lint
+  awscli
+  azure-cli
+  bats
+  circleci
+  derailed/k9s/k9s
+  doctl
+  drone-cli
+  helm
+  helmfile
+  krew
+  kind
+  kompose
+  kops
+  kubeaudit
+  kubernetes-cli
+  kubernetes-helm
+  kustomize
+  kubectx
+  kubebuilder
+  kube-aws
+  kubespy
+  lxc
+  lynis
+  minikube
+  nomad
+  operator-sdk
+  pumba
+  pulumi
+  salt
+  skaffold
+  sonobuoy
+  terraform
+  terraformer
+  terraform-docs
+  aquasecurity/trivy/trivy
+  velero
+  vault
+)
+brew install --force  ${sre_packages[@]}
 
 # Install kpt
 brew tap GoogleContainerTools/kpt https://github.com/GoogleContainerTools/kpt.git
@@ -88,9 +91,9 @@ intellij=(
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "installing apps with Cask..."
-brew cask install --appdir="/Applications" ${apps[@]}
+brew cask install --force --appdir="/Applications" ${apps[@]}
 # objective-see
-brew cask install --appdir="/Applications" ${objective-see[@]}
+brew cask install --force --appdir="/Applications" ${objective-see[@]}
 # Clean up
 brew cleanup
 

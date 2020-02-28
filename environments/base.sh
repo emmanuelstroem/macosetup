@@ -37,49 +37,61 @@ brew install git
 
 
 echo "Installing brew git utilities..."
-brew install git-extras
-brew install legit
-brew install git-flow
-brew install git-secrets
+git_apps=(
+  git-extras
+  legit
+  git-flow
+  git-secrets
+)
+brew install --force ${git_apps[@]}
+
+# brew install git-extras
+# brew install legit
+# brew install git-flow
+# brew install git-secrets
 
 echo "Installing Language packages..."
-brew install go
-brew install erlang
-brew install elixir
-brew install node
-brew install rust
+languages=(
+  elixir
+  erlang
+  go
+  node
+  rust
+  openjdk
+)
+brew install --force ${languages[@]}
 
 echo "Installing Basic packages..."
-brew install circleci
-brew install docker
-brew install docker-compose
-brew install dive
-brew install emacs
-brew install ssh-vault
-brew install vegeta
-brew install wpscan
+basic_packges=(
+  circleci
+  docker
+  docker-compose
+  dive
+  ssh-vault
+  vegeta
+  wpscan
+)
+brew install --force ${basic_packges[@]}
 
 echo "Installing other brew stuff..."
-brew install axel
-brew install brew-cask-completion
-brew install bash-completion
-brew install fzf
-brew install glances
-brew install imagemagick
-brew install lsof
-brew install mas
-brew install qrencode
-brew install rats
-brew install tailsman
-brew install tree
-brew install tig
-brew install tmux
-brew install wget
+extra_apps=(
+  axel
+  brew-cask-completion
+  bash-completion
+  fzf
+  glances
+  imagemagick
+  lsof
+  mas
+  qrencode
+  rats
+  tree
+  tig
+  tmux
+  wget
 
-echo "setting up openjdk"
-brew install openjdk
-ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+)
+brew install --force ${extra_apps[@]}
 
 # Apps
 base_apps=(
@@ -97,12 +109,9 @@ base_apps=(
   google-cloud-sdk
   iterm2
   keybase
-  onepassword
   oversight
   pastebot
   postman
-  prey
-  python
   selfcontrol
   slack
   soundnode
@@ -111,13 +120,12 @@ base_apps=(
   spotify
   skype
   tor-browser
-  vagrant
   visual-studio-code
   vlc
 )
 
 echo "installing apps with Cask..."
-brew cask install --appdir="/Applications" ${base_apps[@]}
+brew cask install --force --appdir="/Applications" ${base_apps[@]}
 
 echo "Add Google Cloud SDK to .zshrc"
 
@@ -131,18 +139,11 @@ if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion
   grep -qxF 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'' $HOME/.zshrc || echo 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'' >> $HOME/.zshrc
 fi
 
-echo "Brew linking Alfred..."
-brew cask alfred link
-
 echo "Brew Cleanup..."
 brew cleanup
 
-echo "Please setup and sync Dropbox, and then run this script again."
-read -p "Press [Enter] key after this..."
-
-echo "Restoring setup from Mackup..."
-#mackup restore @TODO uncomment
-
+echo "Please setup and sync Dropbox."
+# read -p "Press [Enter] key after this..."
 
 echo "Setting some Mac settings..."
 
