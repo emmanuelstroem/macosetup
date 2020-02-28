@@ -2,8 +2,10 @@
 set -ex
 
 #Install Zsh & Oh My Zsh
-echo "Installing Oh My ZSH..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if test ! $(which zsh); then
+  echo "Installing Oh My ZSH..."
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 echo "Setting up PowerLevel10k..."
 # cd  $HOME/.oh-my-zsh/themes/custom/
