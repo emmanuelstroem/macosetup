@@ -16,10 +16,14 @@ git clone https://github.com/emmanuelstroem/macosetup.git && cd macosetup
 ## Update dotfiles (if any)
 Either clone your own dotfiles repo into this workspace
 Or
-### .zshrc
-Replace the file dotfiles/.zshrc with your own
+### **.gitconfig**
+Populate user, email, username values in the [dotfile/.gitconfig](dotfiles/.gitconfig) file
+
+### **.zshrc**
+Replace the file [dotfiles/.zshrc](dotfiles/.zshrc) with your own
+
 ### .p10k.zsh
-Replace the powerlevel config dotfiles/.p10k.zsh with your own
+Replace the powerlevel config [dotfiles/.p10k.zsh](dotfiles/.p10k.zsh) with your own
 
 ## Setup for desired environment
 ### Available environments

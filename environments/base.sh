@@ -4,7 +4,11 @@ set -ex
 echo "Preparing Foundation... "
 
 echo "Installing xcode-stuff"
-xcode-select --install
+if xcode-select --install; then
+  echo "xcode-select installed"
+else
+  echo "xcode-select already exists"
+fi
 
 # Check for Homebrew,
 # Install if we don't have it
@@ -13,13 +17,16 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+echo "Setup ZSH Shell"
+sh ./environments/ohmyz.sh
+
 # Update homebrew recipes
 echo "Updating homebrew..."
 brew update
 
-# Install Homebrew Cask
+# Tap Homebrew Cask
 echo "Installing homebrew cask"
-brew install caskroom/cask/brew-cask
+brew tap homebrew/cask-cask
 
 echo "Installing Git..."
 brew install git
@@ -70,9 +77,6 @@ brew install tree
 brew install tig
 brew install tmux
 brew install wget
-
-echo "Setup ZSH Shell"
-sh ohmyz.sh
 
 echo "setting up openjdk"
 brew install openjdk

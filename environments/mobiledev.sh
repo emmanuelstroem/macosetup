@@ -1,7 +1,7 @@
 #! /bin/bash
 set -ex
 
-sh base.sh
+sh ./environments/base.sh
 
 echo "MobileDev Setup"
 

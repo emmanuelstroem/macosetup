@@ -10,10 +10,10 @@ echo "Setting up PowerLevel10k..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 echo "Add .zshrc"
-cp dotfiles/.zshrc $HOME/
+cp ./dotfiles/.zshrc $HOME/
 
 echo "Add .p10k.zsh"
-cp dotfiles/.p10k.zsh $HOME/
+cp ./dotfiles/.p10k.zsh $HOME/
 
 # echo "Add aliases"
 
