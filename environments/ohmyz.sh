@@ -9,13 +9,30 @@ fi
 
 
 echo "Setting up PowerLevel10k..."
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
+if [ -d $HOME/.oh-my-zsh/custom//themes/powerlevel10k ]
+then
+  echo "powerlevel10k  already cloned"
+else
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
+fi
 
-echo "Add .zshrc"
-cp ./dotfiles/.zshrc $HOME/
+if [! -f $HOME/.gitconfig]
+then
+  echo "Add .gitconfig"
+  cp ./dotfiles/.gitconfig $HOME/
+fi
 
-echo "Add .p10k.zsh"
-cp ./dotfiles/.p10k.zsh $HOME/
+if [! -f $HOME/.zshrc]
+then
+  echo "Add .zshrc"
+  cp ./dotfiles/.zshrc $HOME/
+fi
+
+if [! -f $HOME/.p10k.zsh]
+then
+  echo "Add .p10k.zsh"
+  cp ./dotfiles/.p10k.zsh $HOME/
+fi
 
 # echo "Add aliases"
 
@@ -47,4 +64,4 @@ fi
 # git clone git@git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 echo "Setting ZSH as shell..."
-chsh -s /bin/zsh
+# chsh -s /bin/zsh
