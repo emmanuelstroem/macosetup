@@ -52,9 +52,7 @@ brew install rust
 echo "Installing Basic packages..."
 brew install circleci
 brew install docker
-brew install docker-completion
 brew install docker-compose
-brew install docker-compose-completion
 brew install dive
 brew install emacs
 brew install ssh-vault
