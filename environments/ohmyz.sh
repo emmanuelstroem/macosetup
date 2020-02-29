@@ -9,7 +9,7 @@ setup_powerlevel() {
     echo "powerlevel10k  already cloned"
   elif [ -d $HOME/.oh-my-zsh ]
   then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
   fi
 }
 
