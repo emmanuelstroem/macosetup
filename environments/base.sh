@@ -120,7 +120,6 @@ base_apps=(
   gitkraken
   google-chrome
   google-backup-and-sync
-  google-cloud-sdk
   iterm2
   keybase
   pastebot

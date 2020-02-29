@@ -48,8 +48,8 @@ if [! -f $HOME/.gitconfig]
 then
   add_gitconfig
 else
-  read -r -p 'Overwrite ~/.gitconfig file ? (y/n) : ' overwrite_gitconfig
-  if [ "$overwrite_gitconfig" = "y" ]
+  read -r -p 'Overwrite ~/.gitconfig file ? (Y/n) : ' overwrite_gitconfig
+  if [ "$overwrite_gitconfig" = "" ] || [ "$overwrite_gitconfig" = "y" ] || [ "$overwrite_gitconfig" = "Y" ] || [ "$overwrite_gitconfig" = "yes" ]
   then
     add_gitconfig
   fi
@@ -60,8 +60,8 @@ if [! -f $HOME/.zshrc]
 then
   add_gitconfig
 else
-  read -r -p 'Overwrite ~/.zshrc file ? (y/n) : ' overwrite_zshrc
-  if [ "$overwrite_zshrc" = "y" ]
+  read -r -p 'Overwrite ~/.zshrc file ? (Y/n) : ' overwrite_zshrc
+  if [ "$overwrite_zshrc" = "" ] || [ "$overwrite_zshrc" = "y" ] || [ "$overwrite_zshrc" = "Y" ] || [ "$overwrite_zshrc" = "yes" ]
   then
     add_zshrc
   fi
@@ -72,8 +72,8 @@ if [! -f $HOME/.p10k.zsh]
 then
   add_p10k
 else
-  read -r -p 'Overwrite ~/.p10k.zsh file ? (y/n) : ' overwrite_p10k
-  if [ "$overwrite_p10k" = "y" ]
+  read -r -p 'Overwrite ~/.p10k.zsh file ? (Y/n) : ' overwrite_p10k
+  if [ "$overwrite_p10k" = "" ] || [ "$overwrite_p10k" = "y" ] || [ "$overwrite_p10k" = "Y" ] || [ "$overwrite_p10k" = "yes" ]
   then
     add_p10k
   fi
