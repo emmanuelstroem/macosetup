@@ -30,8 +30,8 @@ brew upgrade
 
 
 # Tap Homebrew Cask
-echo "Installing homebrew cask"
-brew tap homebrew/cask-cask
+# echo "Installing homebrew cask"
+# brew tap homebrew/cask-cask
 
 echo "Installing Git..."
 brew install git
@@ -123,7 +123,6 @@ base_apps=(
   google-cloud-sdk
   iterm2
   keybase
-  oversight
   pastebot
   postman
   selfcontrol
@@ -168,6 +167,9 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 #"Allow text selection in Quick Look"
 defaults write com.apple.finder QLEnableTextSelection -bool TRUE
+
+#"Showing status bar in Finder by default"
+defaults write com.apple.finder ShowStatusBar -bool true
 
 #"Disabling OS X Gate Keeper"
 #"(You'll be able to install any app you want from here on, not just Mac App Store apps)"
@@ -223,7 +225,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 #"Enabling snap-to-grid for icons on the desktop and in other icon views"
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+# /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 #"Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"

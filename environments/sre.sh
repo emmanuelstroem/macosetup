@@ -71,8 +71,9 @@ apps=(
   kubernetic
   wireshark
 )
-# Objective-See
-objective-see=(
+
+# Objective-See Apps
+objective_see=(
   blockblock
   do-not-disturb
   lulu
@@ -94,7 +95,7 @@ echo "installing apps with Cask..."
 brew cask install --force --appdir="/Applications" ${apps[@]}
 
 # objective-see
-# brew cask install --force --appdir="/Applications" ${objective-see[@]}
+# brew cask install --force --appdir="/Applications" ${objective_see[@]}
 
 # Clean up
 brew cleanup

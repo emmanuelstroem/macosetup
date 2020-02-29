@@ -18,9 +18,10 @@ fi
 
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
+
 # Install nerd fonts
-brew install font-hack-nerd-font
-brew install font-meslo-nerd-font
+brew cask install font-hack-nerd-font
+brew cask install font-meslo-nerd-font
 
 if [! -f $HOME/.gitconfig]
 then
