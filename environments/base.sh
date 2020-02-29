@@ -72,7 +72,7 @@ brew link --force openjdk
 # Add OpenJDK to zsh
 if [ -d '/usr/local/opt/openjdk' ]; then
   grep -qxF '# The next line adds PATH for the OpenJDK.' $HOME/.zshrc || echo '# The next line adds PATH for the OpenJDK.' >> $HOME/.zshrc
-  grep -qxF 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' $HOME/.zshrc || echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> $HOME/.zshrc
+  grep -qxF 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' $HOME/.zshrc || echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"\n' >> $HOME/.zshrc
 fi
 
 echo "Installing Basic packages..."
@@ -143,12 +143,12 @@ echo "Add Google Cloud SDK to .zshrc"
 
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then
   grep -qxF '# The next line updates PATH for the Google Cloud SDK.' $HOME/.zshrc || echo '# The next line updates PATH for the Google Cloud SDK.' >> $HOME/.zshrc
-  grep -qxF 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'' $HOME/.zshrc || echo 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'' >> $HOME/.zshrc
+  grep -qxF 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'' $HOME/.zshrc || echo 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'\n' >> $HOME/.zshrc
 fi
 
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then
   grep -qxF '# The next line updates PATH for the Google Cloud SDK.' $HOME/.zshrc || echo '# The next line updates PATH for the Google Cloud SDK.' >> $HOME/.zshrc
-  grep -qxF 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'' $HOME/.zshrc || echo 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'' >> $HOME/.zshrc
+  grep -qxF 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'' $HOME/.zshrc || echo 'source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'\n' >> $HOME/.zshrc
 fi
 
 echo "Brew Cleanup..."

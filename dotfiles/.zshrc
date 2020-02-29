@@ -114,3 +114,4 @@ case ${HIST_STAMPS-} in
   "") alias history='omz_history' ;;
   *) alias history="omz_history -t '$HIST_STAMPS'" ;;
 esac
+
