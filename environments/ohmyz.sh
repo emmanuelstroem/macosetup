@@ -7,10 +7,7 @@ then
   echo "ZSH already exists"
 else
   echo "Installing oh-my-zsh"
-  if [ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ]
-  then
-    echo "oh-my-zsh is now installed"
-  fi
+  curl -s https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash -s >/dev/null 2>&1
 fi
 
 echo "Setting up PowerLevel10k..."
