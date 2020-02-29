@@ -24,7 +24,6 @@ apps=(
   cocoapods
   fastlane
   kotlin-native
-  unity-android-support-for-editor
   wwdc
 )
 

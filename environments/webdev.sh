@@ -19,7 +19,6 @@ brew install jsonnet
 brew install jsonpp
 brew install markdown
 brew install prettier
-brew install php
 brew install react-native-cli
 brew install yarn
 brew install yarn-completion
@@ -50,7 +49,6 @@ apps=(
   googleappengine
   graphiql
   react-native-debugger
-  sublime-text
 )
 
 # Install apps to /Applications

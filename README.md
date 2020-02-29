@@ -7,6 +7,14 @@ It utilizes
 - `brew` to install the Homebrew packages and
 - `mas` to install the Apple App Store apps like Xcode
 
+# Pre-Requisites:
+- Login to Mac App Store before executing the script
+- Authenticate terminal to github using the command `ssh -T git@github.com`
+
+# NOTE:
+- Some apps will require you to enter you computer login password during install (keep an eye on the terminal)
+-
+
 # Instructions
 ## Clone the Repo
 ```
@@ -60,3 +68,10 @@ Add JAVA JDK Path to .zshrc file
 ```
 echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> ~/.zshrc
 ```
+
+# Additional Packages
+Sublime-Text: `brew cask install sublime-text`
+
+# Stubborn Packages
+- Oversight by Objective-See: `brew cask install oversight`
+-

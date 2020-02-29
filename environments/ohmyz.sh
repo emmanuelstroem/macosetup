@@ -16,6 +16,12 @@ else
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
 fi
 
+# Tap nerd-font cask
+brew tap homebrew/cask-fonts
+# Install nerd fonts
+brew install font-hack-nerd-font
+brew install font-meslo-nerd-font
+
 if [! -f $HOME/.gitconfig]
 then
   echo "Add .gitconfig"

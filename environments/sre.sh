@@ -92,8 +92,10 @@ intellij=(
 # Default is: /Users/$user/Applications
 echo "installing apps with Cask..."
 brew cask install --force --appdir="/Applications" ${apps[@]}
+
 # objective-see
-brew cask install --force --appdir="/Applications" ${objective-see[@]}
+# brew cask install --force --appdir="/Applications" ${objective-see[@]}
+
 # Clean up
 brew cleanup
 

@@ -20,9 +20,14 @@ fi
 echo "Setup ZSH Shell"
 sh ./environments/ohmyz.sh
 
-# Update homebrew recipes
+# Update homebrew
 echo "Updating homebrew..."
 brew update
+
+# Upgrade homebrew recipes
+echo "Upgrading homebrew packages..."
+brew upgrade
+
 
 # Tap Homebrew Cask
 echo "Installing homebrew cask"
@@ -60,6 +65,15 @@ languages=(
   openjdk
 )
 brew install --force ${languages[@]}
+
+# Link OpenJDK
+brew link --force openjdk
+
+# Add OpenJDK to zsh
+if [ -d '/usr/local/opt/openjdk' ]; then
+  grep -qxF '# The next line adds PATH for the OpenJDK.' $HOME/.zshrc || echo '# The next line adds PATH for the OpenJDK.' >> $HOME/.zshrc
+  grep -qxF 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' $HOME/.zshrc || echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> $HOME/.zshrc
+fi
 
 echo "Installing Basic packages..."
 basic_packges=(
@@ -114,7 +128,6 @@ base_apps=(
   postman
   selfcontrol
   slack
-  soundnode
   spark
   spectacle
   spotify
