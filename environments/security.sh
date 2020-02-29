@@ -29,7 +29,6 @@ brew install sshtrix
 brew insatll wifi-password
 brew install wireshark
 
-
 # Apps
 apps=(
   angry-ip-scanner

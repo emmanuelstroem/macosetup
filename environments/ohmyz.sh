@@ -4,17 +4,22 @@ set -ex
 # Setup Powerlevel
 setup_powerlevel() {
   echo "Setting up PowerLevel10k..."
-  if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]
+  if [ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]
   then
     echo "powerlevel10k  already cloned"
-  elif [ -d $HOME/.oh-my-zsh ]
+  elif [ -d "$HOME/.oh-my-zsh" ]
   then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k &
+    clone_status=$?
+    if [ -z "$clone_status" ]
+    then
+      echo "Powerlevel10k theme downloaded"
+    fi
   fi
 }
 
 #Install Zsh & Oh My Zsh
-if [ -d $HOME/.oh-my-zsh ]
+if [ -d "$HOME/.oh-my-zsh" ]
 then
   echo "ZSH already exists"
   setup_powerlevel
@@ -59,7 +64,7 @@ function add_p10k() {
 }
 
 # Gitconfig
-if [! -f $HOME/.gitconfig]
+if [ ! -f "$HOME/.gitconfig" ]
 then
   add_gitconfig
 else
@@ -71,7 +76,7 @@ else
 fi
 
 # zshrc
-if [! -f $HOME/.zshrc]
+if [ ! -f "$HOME/.zshrc" ]
 then
   add_gitconfig
 else
@@ -83,7 +88,7 @@ else
 fi
 
 # powerlevel10k
-if [! -f $HOME/.p10k.zsh]
+if [ ! -f "$HOME/.p10k.zsh" ]
 then
   add_p10k
 else
@@ -97,7 +102,7 @@ fi
 # echo "Add aliases"
 
 # Setup PowerLevel10K
-if [ -f '$HOME/.p10k.zsh' ]
+if [ -f "$HOME/.p10k.zsh" ]
 then
   grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
   grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n' >> $HOME/.zshrc
