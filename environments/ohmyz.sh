@@ -1,22 +1,37 @@
 #! /bin/bash
 set -ex
 
+# Setup Powerlevel
+setup_powerlevel() {
+  echo "Setting up PowerLevel10k..."
+  if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]
+  then
+    echo "powerlevel10k  already cloned"
+  elif [ -d $HOME/.oh-my-zsh ]
+  then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
+  fi
+}
+
 #Install Zsh & Oh My Zsh
 if [ -d $HOME/.oh-my-zsh ]
 then
   echo "ZSH already exists"
+  setup_powerlevel
 else
   echo "Installing oh-my-zsh"
-  curl -s https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash -s >/dev/null 2>&1
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
+  install_status=$?
+  if [ -z "$install_status" ]
+  then
+    echo "ZSH installed successfully"
+    # setup powerlevel10k
+    setup_powerlevel
+  else
+    echo "ZSH install failed"
+  fi
 fi
 
-echo "Setting up PowerLevel10k..."
-if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]
-then
-  echo "powerlevel10k  already cloned"
-else
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom//themes/powerlevel10k
-fi
 
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
@@ -82,7 +97,8 @@ fi
 # echo "Add aliases"
 
 # Setup PowerLevel10K
-if [ -f '$HOME/.p10k.zsh' ]; then
+if [ -f '$HOME/.p10k.zsh' ]
+then
   grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
   grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n' >> $HOME/.zshrc
 fi
@@ -91,7 +107,8 @@ echo "Setting up Zsh plugins..."
 # Syntax Highlighting
 brew install zsh-syntax-highlighting
 
-if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]; then
+if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
+then
   grep -qxF '# The next line loads zsh-syntax-highlighting.' $HOME/.zshrc || echo '# The next line loads zsh-syntax-highlighting.' >> $HOME/.zshrc
   grep -qxF 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'\n' >> $HOME/.zshrc
 fi
@@ -100,7 +117,8 @@ fi
 # Auto Suggestions
 brew install zsh-autosuggestions
 
-if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]; then
+if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
+then
   grep -qxF '# The next line loads zsh-autosuggestions.' $HOME/.zshrc || echo '# The next line loads zsh-autosuggestions.' >> $HOME/.zshrc
   grep -qxF 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'\n' >> $HOME/.zshrc
 fi

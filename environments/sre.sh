@@ -69,7 +69,6 @@ apps=(
   keybase
   kubecontext
   kubernetic
-  wireshark
 )
 
 # Objective-See Apps
