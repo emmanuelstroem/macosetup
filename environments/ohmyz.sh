@@ -2,14 +2,14 @@
 set -ex
 
 # Setup Powerlevel
-setup_powerlevel() {
+function setup_powerlevel() {
   echo "Setting up PowerLevel10k..."
   if [ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]
   then
     echo "powerlevel10k  already cloned"
   elif [ -d "$HOME/.oh-my-zsh" ]
   then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/themes/powerlevel10k &
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k &
     clone_status=$?
     if [ -z "$clone_status" ]
     then
@@ -27,11 +27,9 @@ else
   echo "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
   install_status=$?
-  if [ -z "$install_status" ]
+  if [ "$install_status" -eq 0 ]
   then
     echo "ZSH installed successfully"
-    # setup powerlevel10k
-    setup_powerlevel
   else
     echo "ZSH install failed"
   fi
@@ -99,13 +97,16 @@ else
   fi
 fi
 
+# setup powerlevel10k
+setup_powerlevel
+
 # echo "Add aliases"
 
 # Setup PowerLevel10K
 if [ -f "$HOME/.p10k.zsh" ]
 then
   grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
-  grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n' >> $HOME/.zshrc
+  grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
 fi
 
 echo "Setting up Zsh plugins..."
@@ -120,7 +121,7 @@ fi
 if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
 then
   grep -qxF '# The next line loads zsh-syntax-highlighting.' $HOME/.zshrc || echo '# The next line loads zsh-syntax-highlighting.' >> $HOME/.zshrc
-  grep -qxF 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\n' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
 fi
 
 # git clone git@git://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
@@ -135,7 +136,7 @@ fi
 if [ -f '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' ]
 then
   grep -qxF '# The next line loads zsh-autosuggestions.' $HOME/.zshrc || echo '# The next line loads zsh-autosuggestions.' >> $HOME/.zshrc
-  grep -qxF 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh\n' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
 fi
 # git clone git@git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
