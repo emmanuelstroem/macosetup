@@ -96,6 +96,22 @@ brew cask install --force --appdir="/Applications" ${apps[@]}
 # objective-see
 # brew cask install --force --appdir="/Applications" ${objective_see[@]}
 
+# Add GCP SDK PATH
+echo "Add Google Cloud SDK to .zshrc"
+
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]
+then
+  grep -qxF '# The next line updates PATH for the Google Cloud SDK.' $HOME/.zshrc || echo '# The next line updates PATH for the Google Cloud SDK.' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' $HOME/.zshrc || echo 'source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc\n' >> $HOME/.zshrc
+fi
+
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]
+then
+  grep -qxF '# The next line updates PATH for the Google Cloud SDK.' $HOME/.zshrc || echo '# The next line updates PATH for the Google Cloud SDK.' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' $HOME/.zshrc || echo 'source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc\n' >> $HOME/.zshrc
+fi
+
+
 # Clean up
 brew cleanup
 
