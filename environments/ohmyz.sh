@@ -9,11 +9,12 @@ function setup_powerlevel() {
     echo "powerlevel10k  already cloned"
   elif [ -d "$HOME/.oh-my-zsh" ]
   then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k &
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
     clone_status=$?
     if [ -z "$clone_status" ]
     then
-      echo "Powerlevel10k theme downloaded"
+      echo "Update Powerlevel10k theme"
+      git -C $HOME/.oh-my-zsh/custom/themes/powerlevel10k pull origin master
     fi
   fi
 }
@@ -26,16 +27,15 @@ then
 else
   echo "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
-  install_status=$?
-  if [ "$install_status" -eq 0 ]
+  if ps -p $! >&-
   then
-    echo "ZSH installed successfully"
+    wait $!
+    echo "ZSH is installing . . . "
   else
-    echo "ZSH install failed"
+    echo "ZSH install finished"
   fi
 fi
-
-
+x
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
 
@@ -44,58 +44,70 @@ brew cask install font-hack-nerd-font
 brew cask install font-meslo-nerd-font
 
 # add gitconfig
-function add_gitconfig() {
+function copy_gitconfig() {
   echo "Add .gitconfig"
   cp ./dotfiles/.gitconfig $HOME/
 }
 
+function add_gitconfig() {
+  if [ ! -f "$HOME/.gitconfig" ]
+  then
+    copy_gitconfig
+  else
+    read -r -p 'Overwrite ~/.gitconfig file ? (Y/n) : ' overwrite_gitconfig
+    if [ "$overwrite_gitconfig" = "" ] || [ "$overwrite_gitconfig" = "y" ] || [ "$overwrite_gitconfig" = "Y" ] || [ "$overwrite_gitconfig" = "yes" ]
+    then
+      copy_gitconfig
+    fi
+  fi
+}
+
 # add zshrc
-function add_zshrc() {
+function copy_zshrc() {
   echo "Add .zshrc"
   cp ./dotfiles/.zshrc $HOME/
 }
 
+function add_zshrc() {
+  if [ ! -f "$HOME/.zshrc" ]
+  then
+    copy_zshrc
+  else
+    read -r -p 'Overwrite ~/.zshrc file ? (Y/n) : ' overwrite_zshrc
+    if [ "$overwrite_zshrc" = "" ] || [ "$overwrite_zshrc" = "y" ] || [ "$overwrite_zshrc" = "Y" ] || [ "$overwrite_zshrc" = "yes" ]
+    then
+      copy_zshrc
+    fi
+  fi
+}
+
 # add powerlevel
-function add_p10k() {
+function copy_p10k() {
   echo "Add .p10k.zsh"
   cp ./dotfiles/.p10k.zsh $HOME/
 }
 
-# Gitconfig
-if [ ! -f "$HOME/.gitconfig" ]
-then
-  add_gitconfig
-else
-  read -r -p 'Overwrite ~/.gitconfig file ? (Y/n) : ' overwrite_gitconfig
-  if [ "$overwrite_gitconfig" = "" ] || [ "$overwrite_gitconfig" = "y" ] || [ "$overwrite_gitconfig" = "Y" ] || [ "$overwrite_gitconfig" = "yes" ]
+function add_p10k() {
+  if [ ! -f "$HOME/.p10k.zsh" ]
   then
-    add_gitconfig
+    copy_p10k
+  else
+    read -r -p 'Overwrite ~/.p10k.zsh file ? (Y/n) : ' overwrite_p10k
+    if [ "$overwrite_p10k" = "" ] || [ "$overwrite_p10k" = "y" ] || [ "$overwrite_p10k" = "Y" ] || [ "$overwrite_p10k" = "yes" ]
+    then
+      copy_p10k
+    fi
   fi
-fi
+}
+
+# Gitconfig
+add_gitconfig
 
 # zshrc
-if [ ! -f "$HOME/.zshrc" ]
-then
-  add_gitconfig
-else
-  read -r -p 'Overwrite ~/.zshrc file ? (Y/n) : ' overwrite_zshrc
-  if [ "$overwrite_zshrc" = "" ] || [ "$overwrite_zshrc" = "y" ] || [ "$overwrite_zshrc" = "Y" ] || [ "$overwrite_zshrc" = "yes" ]
-  then
-    add_zshrc
-  fi
-fi
+add_zshrc
 
 # powerlevel10k
-if [ ! -f "$HOME/.p10k.zsh" ]
-then
-  add_p10k
-else
-  read -r -p 'Overwrite ~/.p10k.zsh file ? (Y/n) : ' overwrite_p10k
-  if [ "$overwrite_p10k" = "" ] || [ "$overwrite_p10k" = "y" ] || [ "$overwrite_p10k" = "Y" ] || [ "$overwrite_p10k" = "yes" ]
-  then
-    add_p10k
-  fi
-fi
+add_p10k
 
 # setup powerlevel10k
 setup_powerlevel
@@ -114,18 +126,18 @@ echo "Setting up Zsh plugins..."
 if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
 then
   echo "ZSH Syntax Highlighing already exists"
-  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master &
+  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master
 else
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 fi
 
 # Auto Suggestions
 if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
 then
   echo "ZSH Autosuggestions already exists"
-  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull origin master &
+  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull origin master
 else
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions &
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
 
 echo "Setting ZSH as shell..."
