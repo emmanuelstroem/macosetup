@@ -9,7 +9,7 @@ setup_powerlevel() {
     echo "powerlevel10k  already cloned"
   elif [ -d "$HOME/.oh-my-zsh" ]
   then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k &
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/themes/powerlevel10k &
     clone_status=$?
     if [ -z "$clone_status" ]
     then
@@ -105,27 +105,37 @@ fi
 if [ -f "$HOME/.p10k.zsh" ]
 then
   grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
-  grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n' >> $HOME/.zshrc
+  grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh'\n >> $HOME/.zshrc
 fi
 
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting
-brew install zsh-syntax-highlighting
+if [ ! -d '/usr/local/share/zsh-syntax-highlighting' ]
+then
+  brew upgrade zsh-syntax-highlighting
+else
+  brew install zsh-syntax-highlighting
+fi
 
 if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
 then
   grep -qxF '# The next line loads zsh-syntax-highlighting.' $HOME/.zshrc || echo '# The next line loads zsh-syntax-highlighting.' >> $HOME/.zshrc
-  grep -qxF 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'\n' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'\n >> $HOME/.zshrc
 fi
 
 # git clone git@git://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 # Auto Suggestions
-brew install zsh-autosuggestions
+if [ ! -d '/usr/local/share/zsh-autosuggestions' ]
+then
+  brew upgrade zsh-autosuggestions
+else
+  brew install zsh-autosuggestions
+fi
 
-if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
+if [ -f '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' ]
 then
   grep -qxF '# The next line loads zsh-autosuggestions.' $HOME/.zshrc || echo '# The next line loads zsh-autosuggestions.' >> $HOME/.zshrc
-  grep -qxF 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'\n' >> $HOME/.zshrc
+  grep -qxF 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'\n >> $HOME/.zshrc
 fi
 # git clone git@git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
