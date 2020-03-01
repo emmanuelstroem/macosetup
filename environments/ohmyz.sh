@@ -106,39 +106,27 @@ setup_powerlevel
 if [ -f "$HOME/.p10k.zsh" ]
 then
   grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
-  grep -qxF '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' $HOME/.zshrc || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
+  grep -qxF '[[ ! -f "$HOME/.p10k.zsh" ]] || source '~/.p10k.zsh'' $HOME/.zshrc || echo '[[ ! -f "$HOME/.p10k.zsh" ]] || source '$HOME/.p10k.zsh'' >> $HOME/.zshrc
 fi
 
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting
-if [ ! -d '/usr/local/share/zsh-syntax-highlighting' ]
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
 then
-  brew upgrade zsh-syntax-highlighting
+  echo "ZSH Syntax Highlighing already exists"
+  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master &
 else
-  brew install zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &
 fi
 
-if [ -f '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' ]
-then
-  grep -qxF '# The next line loads zsh-syntax-highlighting.' $HOME/.zshrc || echo '# The next line loads zsh-syntax-highlighting.' >> $HOME/.zshrc
-  grep -qxF 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
-fi
-
-# git clone git@git://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 # Auto Suggestions
-if [ ! -d '/usr/local/share/zsh-autosuggestions' ]
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
 then
-  brew upgrade zsh-autosuggestions
+  echo "ZSH Autosuggestions already exists"
+  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull origin master &
 else
-  brew install zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions &
 fi
-
-if [ -f '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' ]
-then
-  grep -qxF '# The next line loads zsh-autosuggestions.' $HOME/.zshrc || echo '# The next line loads zsh-autosuggestions.' >> $HOME/.zshrc
-  grep -qxF 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' $HOME/.zshrc || echo 'source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
-fi
-# git clone git@git://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 echo "Setting ZSH as shell..."
 # chsh -s /bin/zsh

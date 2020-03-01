@@ -73,7 +73,7 @@ brew link --force openjdk
 if [ -d '/usr/local/opt/openjdk' ]
 then
   grep -qxF '# The next line adds PATH for the OpenJDK.' $HOME/.zshrc || echo '# The next line adds PATH for the OpenJDK.' >> $HOME/.zshrc
-  grep -qxF 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' $HOME/.zshrc || echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> $HOME/.zshrc || echo '' >> $HOME/.zshrc
+  grep -qxF 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' $HOME/.zshrc || echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> $HOME/.zshrc
 fi
 
 echo "Installing Basic packages..."
