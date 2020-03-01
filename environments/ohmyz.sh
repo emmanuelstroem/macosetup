@@ -27,15 +27,16 @@ then
 else
   echo "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
+  # wait for background task to finish
   if ps -p $! >&-
   then
     wait $!
-    echo "ZSH is installing . . . "
+    echo "ZSH is now installed . . . "
   else
-    echo "ZSH install finished"
+    echo "ZSH installing..."
   fi
 fi
-x
+
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
 
