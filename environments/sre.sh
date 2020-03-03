@@ -48,6 +48,12 @@ sre_packages=(
 )
 brew install --force  ${sre_packages[@]}
 
+# Update gcloud components
+gcloud components update
+
+# Install Gcloud Components
+gcloud components install appctl
+
 # Install kpt
 brew tap GoogleContainerTools/kpt https://github.com/GoogleContainerTools/kpt.git
 brew install kpt
