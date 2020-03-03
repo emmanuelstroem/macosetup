@@ -82,7 +82,7 @@ basic_packges=(
   docker
   docker-compose
   dive
-  ssh-vault
+  vault
   vegeta
   wpscan
 )

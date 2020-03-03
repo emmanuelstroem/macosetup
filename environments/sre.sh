@@ -45,7 +45,6 @@ sre_packages=(
   terraform-docs
   aquasecurity/trivy/trivy
   velero
-  vault
 )
 brew install --force  ${sre_packages[@]}
 

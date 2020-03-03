@@ -9,11 +9,11 @@ It utilizes
 
 # Pre-Requisites:
 - Login to Mac App Store before executing the script
-- Authenticate terminal to github using the command `ssh -T git@github.com`
+- *not important:* Authenticate terminal to github using the command `ssh -T git@github.com`
 
 # NOTE:
+- Since this relies on brew, you get idempotence by default
 - Some apps will require you to enter you computer login password during install (keep an eye on the terminal)
--
 
 # Instructions
 ## Clone the Repo
@@ -22,6 +22,7 @@ git clone https://github.com/emmanuelstroem/macosetup.git && cd macosetup
 ```
 
 ## Update dotfiles (if any)
+These dotfiles are widely based on personal preference and we highly advice maintaining your own version in your own repo.
 Either clone your own dotfiles repo into this workspace
 Or
 ### **.gitconfig**
@@ -57,6 +58,12 @@ Replace the powerlevel config [dotfiles/.p10k.zsh](dotfiles/.p10k.zsh) with your
 ./setup --help
 ```
 
+# Update Terminal Font Setting
+- `CMD + ,` to open Terminal Preferences
+- Goto `Profiles`
+- Select `Text`
+- Change Font to either `MesloGS NF` to have graohical images like git branch or folder show on Terminal
+
 ## Additional Configuration
 ### Configure JAVA
 Symlink
@@ -73,5 +80,9 @@ echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> ~/.zshrc
 Sublime-Text: `brew cask install sublime-text`
 
 # Stubborn Packages
-- Oversight by Objective-See: `brew cask install oversight`
+- Oversight by Objective-See: `brew cask install oversight` - app installs but have to quit it to continue
 -
+
+# Known Issues:
+Issue: Images not showing on Terminals
+Solution: Select one of the already installed Nerd Fonts `Meslo` or `Hack`. If not installed, then install Nerd Fonts
