@@ -37,6 +37,9 @@ else
   fi
 fi
 
+# Untap old font cask
+brew untap caskroom/fonts
+
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
 
