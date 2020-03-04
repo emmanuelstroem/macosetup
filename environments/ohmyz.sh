@@ -144,5 +144,8 @@ else
   git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
 
+# Fix permissions on usr/local/share/zsh
+compaudit | xargs chmod g-w,o-w /usr/local/share/zsh
+
 echo "Setting ZSH as shell..."
 # chsh -s /bin/zsh
