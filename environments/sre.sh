@@ -52,8 +52,8 @@ brew install --force  ${sre_packages[@]}
 brew tap GoogleContainerTools/kpt https://github.com/GoogleContainerTools/kpt.git
 brew install kpt
 
-# Install KeyKey
-mas install 1035137927
+# Install KeyKey - fast typing tutor
+# mas install 1035137927
 
 echo "Cleaning up brew"
 brew cleanup
