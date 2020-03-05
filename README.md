@@ -77,12 +77,25 @@ echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' >> ~/.zshrc
 ```
 
 # Additional Packages
-Sublime-Text: `brew cask install sublime-text`
+Sublime-Text:
+>`brew cask install sublime-text`
+
+Pasta:
+>`mas install pasta`
+
+
 
 # Stubborn Packages
-- Oversight by Objective-See: `brew cask install oversight` - app installs but have to quit it to continue
--
+Oversight by Objective-See:
+- app installs but have to quit it to continue
+>`brew cask install oversight`
+
 
 # Known Issues:
-Issue: Images not showing on Terminals
-Solution: Select one of the already installed Nerd Fonts `Meslo` or `Hack`. If not installed, then install Nerd Fonts
+Issue:
+- Images not showing on Terminals
+
+Solution:
+- Select one of the already installed Nerd Fonts *Meslo*  or *Hack*.
+- If not installed, then install Nerd Fonts
+
