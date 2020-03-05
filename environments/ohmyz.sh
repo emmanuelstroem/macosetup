@@ -104,6 +104,96 @@ function add_p10k() {
   fi
 }
 
+function install_zsh_highlighting_git() {
+  if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
+  then
+    echo "ZSH Syntax Highlighing already exists"
+    git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master
+  else
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  fi
+}
+
+function install_zsh_highlighting() {
+
+  if [ "$1" == "brew"] # install from brew
+  then
+    if [ -d "/usr/local/share/zsh-syntax-highlighting" ]
+    then
+      echo "ZSH Syntax Highlighing already exists"
+      brew upgrade zsh-syntax-highlighting
+    else
+      brew install --force zsh-syntax-highlighting
+    fi
+  elif [ "$1" == "git"] # install from git
+  then
+    if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
+    then
+      echo "ZSH Syntax Highlighing already exists"
+      git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master
+    else
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    fi
+  fi
+
+  add_zsh_highlighting $1
+
+}
+
+function add_zsh_highlighting() {
+  if [ "$1" == "brew"] # add brew install path
+  then
+    if [ -f "/usr/local/share/zsh-syntax-highlighting" ]
+    then
+      grep -qxF '# ZSH Hightlighting Folder.' $HOME/.zshenv || echo '# ZSH Hightlighting Folder.' >> $HOME/.zshenv
+      grep -qxF 'export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters' $HOME/.zshenv || echo 'export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters' >> $HOME/.zshenv
+
+      grep -qxF '# Activate the syntax highlighting.' $HOME/.zshrc || echo '# Activate the syntax highlighting.' >> $HOME/.zshrc
+      grep -qxF 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'' >> $HOME/.zshrc
+    fi
+  else
+    echo "ZSH highlighting is all set!"
+  fi
+}
+
+
+function install_zsh_suggestions() {
+  if [ "$1" == "brew"] # install from brew
+  then
+    if [ -d "/usr/local/share/zsh-autosuggestions" ]
+    then
+      echo "ZSH Syntax Highlighing already exists"
+      brew upgrade zsh-autosuggestions
+    else
+      brew install --force zsh-autosuggestions
+    fi
+  elif [ "$1" == "git"] # install from git
+  then
+    if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
+    then
+      echo "ZSH Autosuggestions already exists"
+      git -C $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull origin master
+    else
+      git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    fi
+  fi
+
+  add_zsh_suggestions $1
+}
+
+function add_zsh_suggestions() {
+  if [ "$1" == "brew"] # add brew install path
+  then
+    if [ -f "/usr/local/share/zsh-autosuggestions" ]
+    then
+      grep -qxF '# Activate the zsh-utosuggestions (may cause slow loading in terminal).' $HOME/.zshrc || echo '# Activate the zsh-utosuggestions (may cause slow loading in terminal).' >> $HOME/.zshrc
+      grep -qxF 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'' $HOME/.zshrc || echo 'source '/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh'' >> $HOME/.zshrc
+    fi
+  else
+    echo "ZSH Autosuggestions is all set!"
+  fi
+}
+
 # Gitconfig
 add_gitconfig
 
@@ -127,22 +217,10 @@ fi
 
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
-then
-  echo "ZSH Syntax Highlighing already exists"
-  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master
-else
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-fi
+install_zsh_highlighting "brew"
 
 # Auto Suggestions
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
-then
-  echo "ZSH Autosuggestions already exists"
-  git -C $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull origin master
-else
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-fi
+install_zsh_suggestions "brew"
 
 # Fix permissions on usr/local/share/zsh
 compaudit | xargs chmod g-w,o-w /usr/local/share/zsh
