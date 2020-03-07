@@ -37,9 +37,6 @@ else
   fi
 fi
 
-# Untap old font cask
-brew untap caskroom/fonts
-
 # Tap nerd-font cask
 brew tap homebrew/cask-fonts
 
@@ -86,9 +83,20 @@ function add_zshrc() {
 }
 
 # add powerlevel
+function activate_p10k() {
+  if [ -f "$HOME/.p10k.zsh" ]
+  then
+    grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
+    grep -qxF '[[ ! -f "$HOME/.p10k.zsh" ]] || source '~/.p10k.zsh'' $HOME/.zshrc || echo '[[ ! -f "$HOME/.p10k.zsh" ]] || source '$HOME/.p10k.zsh'' >> $HOME/.zshrc
+  fi
+}
+
 function copy_p10k() {
   echo "Add .p10k.zsh"
   cp ./dotfiles/.p10k.zsh $HOME/
+
+  # activate powerlevel
+  activate_p10k
 }
 
 function add_p10k() {
@@ -116,7 +124,7 @@ function install_zsh_highlighting_git() {
 
 function install_zsh_highlighting() {
 
-  if [ "$1" == "brew"] # install from brew
+  if [ "$1" = "brew" ] # install from brew
   then
     if [ -d "/usr/local/share/zsh-syntax-highlighting" ]
     then
@@ -125,7 +133,7 @@ function install_zsh_highlighting() {
     else
       brew install --force zsh-syntax-highlighting
     fi
-  elif [ "$1" == "git"] # install from git
+  elif [ "$1" = "git" ] # install from git
   then
     if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
     then
@@ -141,7 +149,7 @@ function install_zsh_highlighting() {
 }
 
 function add_zsh_highlighting() {
-  if [ "$1" == "brew"] # add brew install path
+  if [ "$1" = "brew" ] # add brew install path
   then
     if [ -f "/usr/local/share/zsh-syntax-highlighting" ]
     then
@@ -158,7 +166,7 @@ function add_zsh_highlighting() {
 
 
 function install_zsh_suggestions() {
-  if [ "$1" == "brew"] # install from brew
+  if [ "$1" = "brew" ] # install from brew
   then
     if [ -d "/usr/local/share/zsh-autosuggestions" ]
     then
@@ -167,7 +175,7 @@ function install_zsh_suggestions() {
     else
       brew install --force zsh-autosuggestions
     fi
-  elif [ "$1" == "git"] # install from git
+  elif [ "$1" = "git" ] # install from git
   then
     if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
     then
@@ -182,7 +190,7 @@ function install_zsh_suggestions() {
 }
 
 function add_zsh_suggestions() {
-  if [ "$1" == "brew"] # add brew install path
+  if [ "$1" = "brew" ] # add brew install path
   then
     if [ -f "/usr/local/share/zsh-autosuggestions" ]
     then
@@ -207,13 +215,6 @@ add_p10k
 setup_powerlevel
 
 # echo "Add aliases"
-
-# Setup PowerLevel10K
-if [ -f "$HOME/.p10k.zsh" ]
-then
-  grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
-  grep -qxF '[[ ! -f "$HOME/.p10k.zsh" ]] || source '~/.p10k.zsh'' $HOME/.zshrc || echo '[[ ! -f "$HOME/.p10k.zsh" ]] || source '$HOME/.p10k.zsh'' >> $HOME/.zshrc
-fi
 
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting

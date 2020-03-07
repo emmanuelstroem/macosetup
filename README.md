@@ -99,3 +99,17 @@ Solution:
 - Select one of the already installed Nerd Fonts *Meslo*  or *Hack*.
 - If not installed, then install Nerd Fonts
 
+Issue:
+- nerd-font: Multiple Casks found
+
+Solution:
+- Only homebrew/cask-fonts is available. Untap caskroom/fonts using command:
+- > brew untap caskroom/fonts
+- Re-run the environment again
+
+Issue:
+- fatal: unable to access 'github.com/Homebrew/brew': Could not resolve host: github.com
+
+Solution:
+- Check your internet connection or proxy settings
+- Run the environment again
