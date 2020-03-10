@@ -306,4 +306,70 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+# SystemUIServer
+############
+# Show Bluetooth and Volume icons in Menu Bar
+defaults write com.apple.systemuiserver menuExtras '
+(
+    "/System/Library/CoreServices/Menu Extras/AirPort.menu",
+    "/System/Library/CoreServices/Menu Extras/Battery.menu",
+    "/System/Library/CoreServices/Menu Extras/Bluetooth.menu",
+    "/System/Library/CoreServices/Menu Extras/Clock.menu",
+    "/System/Library/CoreServices/Menu Extras/Displays.menu",
+    "/System/Library/CoreServices/Menu Extras/Volume.menu"
+)'
+
+# Restart SystemUIServer
+killall SystemUIServer
+
+# Disable Guest Login
+defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+
+# Show battery percentage
+defaults write com.apple.menuextra.battery ShowPercent YES
+
+# Trackpad: enable tap to click for this user and for the login screen
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Terminal
+############
+# Quit once finished
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Set default display settings of Terminal
+plutil -replace Window\ Settings.Pro.rowCount -integer 32 ~/Library/Preferences/com.apple.Terminal.plist
+plutil -replace Window\ Settings.Pro.columnCount -integer 118 ~/Library/Preferences/com.apple.Terminal.plist
+
+# iTerm2
+############
+# Don’t display the quitting prompt
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# Finder
+############
+# Show Status Bar
+defaults write com.apple.finder ShowStatusBar -bool true
+# Add Quit option
+defaults write com.apple.finder QuitMenuItem -bool true; killall Finder
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+# Set Desktop as the default location for new Finder windows
+# For other paths, use `PfLo` and `file:///full/path/here/`
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
+# DOCK
+###########
+# Set Dock Icon sizes between 0 and 100, 0 - default
+defaults write com.apple.dock tilesize -int 20 && killall Dock
+
+# ScreenSaver
+#############
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
 echo "Base: DONE!"
