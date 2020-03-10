@@ -21,6 +21,13 @@ It utilizes
 git clone https://github.com/emmanuelstroem/macosetup.git && cd macosetup
 ```
 
+## Add dotfiles
+This path should exist in `macosetuo/dotfiles` and contain all you configs.
+1. Clone dotfiles from your own repository. (highly recommended)
+2. You can also try out mine and customize it to fit your preference: `git clone https://github.com/emmanuelstroem/dotfile.git`
+3. Create a folder `dotfiles` and add your config to it
+4. Ignore this step and continue
+
 ## Update dotfiles (if any)
 These dotfiles are widely based on personal preference and we highly advice maintaining your own version in your own repo.
 Either clone your own dotfiles repo into this workspace
@@ -113,3 +120,17 @@ Issue:
 Solution:
 - Check your internet connection or proxy settings
 - Run the environment again
+
+TODO:
+- scale display to: more space
+
+- set nighshift to custom time: 1900 - 0700
+
+- set trackpad tracking speed to: fast
+
+- set Accessibility->Pointer Control->Trackpad Options-> Enable Dragging - Three finger drag
+
+- set trackpad tap to click
+# Trackpad: enable tap to click for this user and for the login screen
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
