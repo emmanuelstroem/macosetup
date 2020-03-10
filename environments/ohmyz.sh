@@ -1,12 +1,16 @@
 #! /bin/bash
 set -ex
 
+# Variable
+DOTFILES_DIR="$PWD/dotfiles"
+
 # Setup Powerlevel
 function setup_powerlevel() {
   echo "Setting up PowerLevel10k..."
   if [ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]
   then
-    echo "powerlevel10k  already cloned"
+    echo "powerlevel10k  already cloned. Updating it . .. "
+    git -C $HOME/.oh-my-zsh/custom/themes/powerlevel10k pull origin master
   elif [ -d "$HOME/.oh-my-zsh" ]
   then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
@@ -26,7 +30,7 @@ then
   setup_powerlevel
 else
   echo "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended &
   # wait for background task to finish
   if ps -p $! >&-
   then
@@ -41,84 +45,71 @@ fi
 brew tap homebrew/cask-fonts
 
 # Install nerd fonts
-brew cask install font-hack-nerd-font
-brew cask install font-meslo-nerd-font
+brew cask install font-hack-nerd-font font-meslo-nerd-font
+# brew cask install font-meslo-nerd-font
 
-# add gitconfig
-function copy_gitconfig() {
-  echo "Add .gitconfig"
-  cp ./dotfiles/.gitconfig $HOME/
-}
-
-function add_gitconfig() {
-  if [ ! -f "$HOME/.gitconfig" ]
+# Add Dotfiles
+function add_dotfiles() {
+  if [ -d "$DOTFILES_DIR" ]
   then
-    copy_gitconfig
+    for config in $DOTFILES_DIR/.*
+    do
+      config_name="${config#"$PWD/dotfiles/"}"
+      if valid_config $config
+      then
+        if [ ! -f "$HOME/$config_name" ]
+        then
+          # copy config
+          copy_config_to_home_dir $config
+        else
+          # overwrite config
+          overwrite_config_in_home_dir $config
+        fi
+      else
+        # config is not valid
+        continue
+      fi
+    done
+    # # activate config
+    activate_dotfile_config $config
   else
-    read -r -p 'Overwrite ~/.gitconfig file ? (Y/n) : ' overwrite_gitconfig
-    if [ "$overwrite_gitconfig" = "" ] || [ "$overwrite_gitconfig" = "y" ] || [ "$overwrite_gitconfig" = "Y" ] || [ "$overwrite_gitconfig" = "yes" ]
-    then
-      copy_gitconfig
-    fi
+    echo "./dotfiles does not exist. Clone it or create it and try again"
   fi
 }
 
-# add zshrc
-function copy_zshrc() {
-  echo "Add .zshrc"
-  cp ./dotfiles/.zshrc $HOME/
+# Copy dotfile to home
+function copy_config_to_home_dir() {
+  echo "Copying $1"
+  cp $DOTFILES_DIR/$1 $HOME/$1
 }
 
-function add_zshrc() {
-  if [ ! -f "$HOME/.zshrc" ]
+# overwrite dotfile confirmation
+function overwrite_config_in_home_dir() {
+  read -r -p "Overwrite ~/$1 file ? (Y/n) : " overwrite_config
+  if [ "$overwrite_config" = "" ] || [ "$overwrite_config" = "y" ] || [ "$overwrite_config" = "Y" ] || [ "$overwrite_config" = "yes" ]
   then
-    copy_zshrc
+    copy_config_to_home $1
   else
-    read -r -p 'Overwrite ~/.zshrc file ? (Y/n) : ' overwrite_zshrc
-    if [ "$overwrite_zshrc" = "" ] || [ "$overwrite_zshrc" = "y" ] || [ "$overwrite_zshrc" = "Y" ] || [ "$overwrite_zshrc" = "yes" ]
-    then
-      copy_zshrc
-    fi
+    echo "Skipping..."
   fi
 }
 
-# add powerlevel
-function activate_p10k() {
-  if [ -f "$HOME/.p10k.zsh" ]
+function valid_config() {
+  if [ -f "$1" ]
+  then
+    return 0 # 0 for true
+  else
+   return 1 # 1 for false
+  fi
+}
+
+# activate dotfile configs
+function activate_dotfile_config() {
+  # Powerlevel10k
+  if [ $1 = ".p10k.zsh" ] && [ -f "$HOME/.p10k.zsh" ]
   then
     grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
     grep -qxF '[[ ! -f "$HOME/.p10k.zsh" ]] || source '~/.p10k.zsh'' $HOME/.zshrc || echo '[[ ! -f "$HOME/.p10k.zsh" ]] || source '$HOME/.p10k.zsh'' >> $HOME/.zshrc
-  fi
-}
-
-function copy_p10k() {
-  echo "Add .p10k.zsh"
-  cp ./dotfiles/.p10k.zsh $HOME/
-
-  # activate powerlevel
-  activate_p10k
-}
-
-function add_p10k() {
-  if [ ! -f "$HOME/.p10k.zsh" ]
-  then
-    copy_p10k
-  else
-    read -r -p 'Overwrite ~/.p10k.zsh file ? (Y/n) : ' overwrite_p10k
-    if [ "$overwrite_p10k" = "" ] || [ "$overwrite_p10k" = "y" ] || [ "$overwrite_p10k" = "Y" ] || [ "$overwrite_p10k" = "yes" ]
-    then
-      copy_p10k
-    fi
-  fi
-}
-
-function install_zsh_highlighting_git() {
-  if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
-  then
-    echo "ZSH Syntax Highlighing already exists"
-    git -C $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull origin master
-  else
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   fi
 }
 
@@ -164,7 +155,6 @@ function add_zsh_highlighting() {
   fi
 }
 
-
 function install_zsh_suggestions() {
   if [ "$1" = "brew" ] # install from brew
   then
@@ -202,19 +192,8 @@ function add_zsh_suggestions() {
   fi
 }
 
-# Gitconfig
-add_gitconfig
-
-# zshrc
-add_zshrc
-
-# powerlevel10k
-add_p10k
-
-# setup powerlevel10k
-setup_powerlevel
-
-# echo "Add aliases"
+# dotfiles
+add_dotfiles
 
 echo "Setting up Zsh plugins..."
 # Syntax Highlighting
