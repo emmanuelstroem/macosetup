@@ -26,7 +26,11 @@ function setup_powerlevel() {
 #Install Zsh & Oh My Zsh
 if [ -d "$HOME/.oh-my-zsh" ]
 then
-  echo "ZSH already exists"
+  echo "ZSH already exists, Updating it..."
+  if [ -f "$HOME/.oh-my-zsh/tools/upgrade.sh" ]
+  then
+    upgrade_oh_my_zsh
+  fi
   setup_powerlevel
 else
   echo "Installing oh-my-zsh"
