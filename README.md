@@ -131,6 +131,8 @@ TODO:
 - set Accessibility->Pointer Control->Trackpad Options-> Enable Dragging - Three finger drag
 
 - set trackpad tap to click
-# Trackpad: enable tap to click for this user and for the login screen
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+-  Trackpad: enable tap to click for this user and for the login screen
+    >defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+    >defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
