@@ -90,7 +90,6 @@ brew install --force ${basic_packges[@]}
 
 echo "Installing other brew stuff..."
 extra_apps=(
-  1password
   axel
   brew-cask-completion
   bash-completion
@@ -112,6 +111,7 @@ brew install --force ${extra_apps[@]}
 
 # Apps
 base_apps=(
+  1password
   alfred
   aerial
   dash
