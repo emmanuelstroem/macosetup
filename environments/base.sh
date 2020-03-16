@@ -90,6 +90,7 @@ brew install --force ${basic_packges[@]}
 
 echo "Installing other brew stuff..."
 extra_apps=(
+  1password
   axel
   brew-cask-completion
   bash-completion
@@ -100,6 +101,7 @@ extra_apps=(
   mas
   qrencode
   rats
+  tor
   tree
   tig
   tmux
@@ -323,7 +325,7 @@ defaults write com.apple.systemuiserver menuExtras '
 killall SystemUIServer
 
 # Disable Guest Login
-defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+# defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
 
 # Show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent YES
