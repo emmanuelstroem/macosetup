@@ -29,7 +29,7 @@ then
   echo "ZSH already exists, Updating it..."
   if [ -f "$HOME/.oh-my-zsh/tools/upgrade.sh" ]
   then
-    upgrade_oh_my_zsh
+    sh $HOME/.oh-my-zsh/tools/upgrade.sh
   fi
   setup_powerlevel
 else
