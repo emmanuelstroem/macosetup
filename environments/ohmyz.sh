@@ -84,15 +84,15 @@ function add_dotfiles() {
 # Copy dotfile to home
 function copy_config_to_home_dir() {
   echo "Copying $1"
-  cp $DOTFILES_DIR/$1 $HOME/$1
+  cp $1 $HOME/
 }
 
 # overwrite dotfile confirmation
 function overwrite_config_in_home_dir() {
-  read -r -p "Overwrite ~/$1 file ? (Y/n) : " overwrite_config
+  read -r -p "Overwrite $1 file ? (Y/n) : " overwrite_config
   if [ "$overwrite_config" = "" ] || [ "$overwrite_config" = "y" ] || [ "$overwrite_config" = "Y" ] || [ "$overwrite_config" = "yes" ]
   then
-    copy_config_to_home $1
+    copy_config_to_home_dir $1
   else
     echo "Skipping..."
   fi
@@ -110,7 +110,7 @@ function valid_config() {
 # activate dotfile configs
 function activate_dotfile_config() {
   # Powerlevel10k
-  if [ $1 = ".p10k.zsh" ] && [ -f "$HOME/.p10k.zsh" ]
+  if [ -f "$HOME/.p10k.zsh" ]
   then
     grep -qxF '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' $HOME/.zshrc || echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> $HOME/.zshrc
     grep -qxF '[[ ! -f "$HOME/.p10k.zsh" ]] || source '~/.p10k.zsh'' $HOME/.zshrc || echo '[[ ! -f "$HOME/.p10k.zsh" ]] || source '$HOME/.p10k.zsh'' >> $HOME/.zshrc
