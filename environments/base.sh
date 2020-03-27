@@ -124,12 +124,11 @@ base_apps=(
   google-chrome
   google-backup-and-sync
   iterm2
-  keybase
+  nordvpn
   pastebot
   postman
   selfcontrol
   slack
-  spark
   spectacle
   spotify
   skype
@@ -226,7 +225,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock "expose-group-by-app" -bool true
 
 #"Setting Dock to auto-hide and removing the auto-hiding delay"
-defaults write com.apple.dock autohide -bool true
+# defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
