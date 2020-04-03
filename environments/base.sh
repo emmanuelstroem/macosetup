@@ -352,7 +352,7 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Show Status Bar
 defaults write com.apple.finder ShowStatusBar -bool true
 # Add Quit option
-defaults write com.apple.finder QuitMenuItem -bool true; killall Finder
+# defaults write com.apple.finder QuitMenuItem -bool true; killall Finder
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # When performing a search, search the current folder by default
@@ -372,5 +372,13 @@ defaults write com.apple.dock tilesize -int 20 && killall Dock
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Firewall
+#############
+# Enable
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+# Restart Firewall
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+sudo launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist
 
 echo "Base: DONE!"
