@@ -43,6 +43,7 @@ else
   else
     echo "ZSH installing..."
   fi
+  setup_powerlevel
 fi
 
 # Tap nerd-font cask
