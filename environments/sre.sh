@@ -30,6 +30,7 @@ sre_packages=(
   kubebuilder
   kube-aws
   kubespy
+  kubeseal
   lxc
   lynis
   minikube
@@ -91,6 +92,15 @@ intellij=(
 # Default is: /Users/$user/Applications
 echo "installing apps with Cask..."
 brew cask install --force --appdir="/Applications" ${apps[@]}
+
+## Download Docker
+curl https://download.docker.com/mac/stable/Docker.dmg --output Docker.dmg
+
+## Mount Docker dmg
+hdiutil mount Docker.dmg
+
+## Copy Docker to Applications directory
+cp -r /Volumes/Docker/Docker.app /Applications/
 
 # Update gcloud components
 gcloud components update

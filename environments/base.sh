@@ -79,8 +79,6 @@ fi
 echo "Installing Basic packages..."
 basic_packges=(
   circleci
-  docker
-  docker-compose
   dive
   vault
   vegeta
