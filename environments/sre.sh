@@ -95,12 +95,12 @@ brew cask install --force --appdir="/Applications" ${apps[@]}
 
 ## Download Docker
 curl https://download.docker.com/mac/stable/Docker.dmg --output Docker.dmg
-
 ## Mount Docker dmg
 hdiutil mount Docker.dmg
-
 ## Copy Docker to Applications directory
 cp -r /Volumes/Docker/Docker.app /Applications/
+#Unmount Docker Image
+hdiutil mount /Volumes/Docker
 
 # Update gcloud components
 gcloud components update
