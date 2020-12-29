@@ -98,6 +98,7 @@ extra_apps=(
   mas
   qrencode
   rats
+  rectangle
   tor
   tree
   tig
@@ -123,11 +124,9 @@ base_apps=(
   google-backup-and-sync
   iterm2
   nordvpn
-  pastebot
   postman
   selfcontrol
   slack
-  spectacle
   spotify
   skype
   tor-browser
