@@ -50,11 +50,6 @@ git_apps=(
 )
 brew install --force ${git_apps[@]}
 
-# brew install git-extras
-# brew install legit
-# brew install git-flow
-# brew install git-secrets
-
 echo "Installing Language packages..."
 languages=(
   elixir
@@ -82,7 +77,6 @@ basic_packges=(
   dive
   vault
   vegeta
-  wpscan
 )
 brew install --force ${basic_packges[@]}
 
@@ -104,7 +98,6 @@ extra_apps=(
   tig
   tmux
   wget
-
 )
 brew install --force ${extra_apps[@]}
 
@@ -122,6 +115,7 @@ base_apps=(
   gitkraken
   google-chrome
   google-backup-and-sync
+  gpg
   iterm2
   nordvpn
   postman
