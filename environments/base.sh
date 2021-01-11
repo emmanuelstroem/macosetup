@@ -129,7 +129,7 @@ base_apps=(
 )
 
 echo "installing apps with Cask..."
-brew cask install --force --appdir="/Applications" ${base_apps[@]}
+brew install --cask --force --appdir="/Applications" ${base_apps[@]}
 
 echo "Brew Cleanup..."
 brew cleanup
