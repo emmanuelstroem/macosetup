@@ -50,8 +50,7 @@ fi
 brew tap homebrew/cask-fonts
 
 # Install nerd fonts
-brew cask install font-hack-nerd-font font-meslo-nerd-font
-# brew cask install font-meslo-nerd-font
+brew install --cask font-hack-nerd-font font-meslo-nerd-font
 
 # Add Dotfiles
 function add_dotfiles() {
