@@ -87,10 +87,12 @@ extra_apps=(
   bash-completion
   fzf
   glances
+  gpg
   imagemagick
   lsof
   mas
   qrencode
+  pre-commit
   rats
   rectangle
   tor
@@ -115,7 +117,6 @@ base_apps=(
   gitkraken
   google-chrome
   google-backup-and-sync
-  gpg
   iterm2
   nordvpn
   postman
